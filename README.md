@@ -40,6 +40,12 @@ ESBuild for /Users/user/sophon-plugins/plugins on port 2221
 Development server started on http://127.0.0.1:2222/
 ```
 
+## Adblock & Security
+
+I noticed that Brave Browser's built-in Adblock stops any requests to `127.0.0.1`, so you'll need to disable that if you are building plugins against https://zkga.me directly.
+
+You'll also need to "Allow Insecure Content" since this development server doesn't provide an HTTPS certificate.
+
 ## Plugins
 
 The easiest way to load plugins while developing would be to use something like this in the Dark Forest UI:
