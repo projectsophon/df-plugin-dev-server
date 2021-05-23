@@ -1,0 +1,41 @@
+{
+  "name": "@projectsophon/df-plugin-dev-server",
+  "version": "0.0.0",
+  "description": "An ESBuild server for Dark Forest plugin development.",
+  "author": "Blaine Bublitz <blaine.bublitz@gmail.com> (https://github.com/phated)",
+  "repository": "projectsophon/df-plugin-dev-server",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
+  "main": "server.js",
+  "bin": {
+    "df-plugin-dev-server": "server.js"
+  },
+  "files": [
+    "server.js"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "esbuild": "^0.12.1",
+    "get-port": "^5.1.1",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@projectsophon/eslint-config": "0.0.2",
+    "@projectsophon/prettier-config": "0.0.0",
+    "eslint": "^7.27.0",
+    "prettier": "^2.3.0",
+    "typescript": "^4.2.4"
+  },
+  "prettier": "@projectsophon/prettier-config",
+  "eslintConfig": {
+    "extends": "@projectsophon/eslint-config"
+  },
+  "keywords": []
+}
