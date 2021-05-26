@@ -111,13 +111,13 @@ class Plugin {
     const modulePath = "${pathname}?" + cacheBust;
     const { default: RevealMarket } = await import(modulePath);
     this.plugin = new RevealMarket();
-    await this.plugin?.render(container);
+    await this.plugin?.render?.(container);
   }
   draw(ctx) {
-    this.plugin?.draw(ctx);
+    this.plugin?.draw?.(ctx);
   }
   destroy() {
-    this.plugin?.destroy();
+    this.plugin?.destroy?.();
   }
 }
 
