@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.0.1...v1.0.2) (2021-05-26)
+
+
+### Bug Fixes
+
+* Check for the existence of plugin methods before calling ([2cf5362](https://www.github.com/projectsophon/df-plugin-dev-server/commit/2cf536276c433c964c21cf0e2520362535c9267b))
+
 ### [1.0.1](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.0.0...v1.0.1) (2021-05-23)
 
 
