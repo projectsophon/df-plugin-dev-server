@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.0.2...v1.1.0) (2021-05-29)
+
+
+### Features
+
+* Split CLI from server for programatic API ([dcc9c0b](https://www.github.com/projectsophon/df-plugin-dev-server/commit/dcc9c0b3c6f604d5a0e2f0429562e26ce0321c8e))
+
 ### [1.0.2](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.0.1...v1.0.2) (2021-05-26)
 
 
