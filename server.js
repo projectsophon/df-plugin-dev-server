@@ -1,41 +1,14 @@
-#!/usr/bin/env node
-
 import * as path from "path";
 import * as http from "http";
 import { URL } from "url";
 import * as fs from "fs/promises";
-import { default as yargs } from "yargs";
 import * as esbuild from "esbuild";
 import getPort from "get-port";
 import { default as chalk } from "chalk";
 
 const { bold, underline } = chalk;
 
-const parser = yargs()
-  .scriptName("df-plugin-dev-server")
-  .command(
-    "$0",
-    "Start a Dark Forest plugin development server.",
-    (yargs) => {
-      return yargs.options({
-        dir: {
-          desc: "The directory where plugins exist",
-          type: "string",
-          default: "plugins",
-        },
-        ext: {
-          desc: "Extensions to process",
-          type: "array",
-          default: [".js", ".ts"],
-        },
-      });
-    },
-    start
-  );
-
-parser.parse(process.argv.slice(2));
-
-async function start({ dir, ext }) {
+export async function start({ dir, ext }) {
   const proxyPort = await getPort({ port: 2222 });
   const esbuildPort = await getPort({ port: 2221 });
   const pluginDir = path.join(process.cwd(), dir);

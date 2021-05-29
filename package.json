@@ -11,9 +11,10 @@
   "type": "module",
   "main": "server.js",
   "bin": {
-    "df-plugin-dev-server": "server.js"
+    "df-plugin-dev-server": "cli.js"
   },
   "files": [
+    "cli.js",
     "server.js"
   ],
   "scripts": {
