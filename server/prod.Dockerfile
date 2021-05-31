@@ -10,4 +10,4 @@ COPY ./cli.js .
 COPY ./server.js .
 RUN npm i
 
-COPY ./plugins .
+COPY ./plugins/ .

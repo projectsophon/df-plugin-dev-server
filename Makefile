@@ -2,6 +2,9 @@ include .env
 export
 
 up:
+	docker-compose -f docker-compose.yml up
+
+up-build:
 	docker-compose -f docker-compose.yml up -d --build --remove-orphans
 
 stop:
@@ -15,3 +18,6 @@ build:
 
 restart:
 	docker-compose -f docker-compose.yml restart
+
+copy:
+	./scripts/update_plugins.sh

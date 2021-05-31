@@ -17,11 +17,14 @@ You need to create network: `docker network create webproxy`
 From main directory you can execute commands to build and start docker image:
 
 ```bash
-make up -> creates docker image and starts it
+make up -> starts docker image
+make up-build -> creates docker image and starts it
 make restart -> restarts docker image currently running
 make stop -> stops docker container
 make down -> stops docker container and removes image
 make build -> creates docker image
+
+make copy -> updates plugins inside docker image
 ```
 
 ## Usage
