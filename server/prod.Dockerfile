@@ -5,9 +5,5 @@ WORKDIR /app
 RUN apt-get update
 RUN apt-get -y install apt-transport-https ca-certificates
 
-COPY ./package.json .
-COPY ./cli.js .
-COPY ./server.js .
+COPY . .
 RUN npm i
-
-COPY ./plugins/ .

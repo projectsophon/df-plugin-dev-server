@@ -2,10 +2,10 @@ include .env
 export
 
 up:
-	docker-compose -f docker-compose.yml up
+	docker-compose -f docker-compose.yml up -d
 
 up-build:
-	docker-compose -f docker-compose.yml up -d --build --remove-orphans
+	docker-compose -f docker-compose.yml up --build --remove-orphans
 
 stop:
 	docker-compose -f docker-compose.yml stop
