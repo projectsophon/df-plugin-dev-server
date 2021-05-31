@@ -10,6 +10,20 @@ You can install the command globally using:
 npm i -g @projectsophon/df-plugin-dev-server
 ```
 
+## Docker image installation and running
+
+You need to create network: `docker network create webproxy`
+
+From main directory you can execute commands to build and start docker image:
+
+```bash
+make up -> creates docker image and starts it
+make restart -> restarts docker image currently running
+make stop -> stops docker container
+make down -> stops docker container and removes image
+make build -> creates docker image
+```
+
 ## Usage
 
 Once installed, you should have access to the command:
