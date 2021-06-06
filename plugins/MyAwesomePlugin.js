@@ -7,7 +7,7 @@
  */
  console.log(df, ui);
 
- class MyAwesomePlugin {
+ class Plugin {
    constructor() {}
  
    /**
@@ -24,4 +24,4 @@
  /**
   * And don't forget to export it!
   */
- export default MyAwesomePlugin;
+ export default Plugin;

@@ -12,20 +12,24 @@ npm i -g @projectsophon/df-plugin-dev-server
 
 ## Docker image installation and running
 
-You need to create network: `docker network create webproxy`
-
 From main directory you can execute commands to build and start docker image:
 
-```bash
-make up -> starts docker image
-make up-build -> creates docker image and starts it
-make restart -> restarts docker image currently running
-make stop -> stops docker container
-make down -> stops docker container and removes image
-make build -> creates docker image
+To build & run without getting promped docker output simply run (with -d):
 
-make copy -> updates plugins inside docker image
+`docker-compose -f docker-compose.yml up -d --build --remove-orphans`
+
+To just run existing image without build, remove: `--build --remove-orphans`
+
+To stop you should use `stop`. To stop and delete use `down`:
+
+```bash
+docker-compose -f docker-compose.yml stop
+docker-compose -f docker-compose.yml down
 ```
+
+To only build docker image:
+
+`docker-compose -f docker-compose.yml build `
 
 ## Usage
 

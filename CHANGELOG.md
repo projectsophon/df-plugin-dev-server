@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.1.0...v1.1.1) (2021-05-06)
+
+
+### Features
+
+* Added Docker layer
+
 ## [1.1.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.0.2...v1.1.0) (2021-05-29)
 
 

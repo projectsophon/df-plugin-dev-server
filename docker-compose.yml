@@ -5,15 +5,15 @@ services:
             - ${WEB_LISTEN_PORT_BACKEND:-2222}:${WEB_OUTPUT_PORT_BACKEND:-2222}
         container_name: plugin_server
         build:
-            context: server
+            context: .
             target: base
             dockerfile: prod.Dockerfile
         command: node cli.js
         restart: unless-stopped
+        volumes:
+            - ./plugins:/app/plugins
         networks:
-            - default
+            - plugin_network
 
 networks:
-    default:
-        external:
-            name: ${NETWORK:-webproxy}
+    plugin_network:
