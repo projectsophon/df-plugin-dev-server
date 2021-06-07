@@ -72,11 +72,13 @@ Doing the above will proxy your plugin through a cache busting plugin!
 
 From main directory you can execute commands to build and start docker image:
 
-To build & run without getting promped docker output simply run (with -d):
+To build & run without getting prompted for docker output simply run (with -d):
 
 `docker-compose -f docker-compose.yml up -d --build --remove-orphans`
 
-To just run existing image without build, remove: `--build --remove-orphans`
+To run an existing image without building, remove `--build --remove-orphans`:
+
+`docker-compose -f docker-compose.yml up -d`
 
 To stop you should use `stop`. To stop and delete use `down`:
 
@@ -85,11 +87,11 @@ docker-compose -f docker-compose.yml stop
 docker-compose -f docker-compose.yml down
 ```
 
-To only build docker image:
+To only build the docker image:
 
 `docker-compose -f docker-compose.yml build `
 
-If you image is built, you can work with `docker` tool:
+If your image is already built, you can use the `docker` command directly:
 
 ```bash
 docker start plugin_server
