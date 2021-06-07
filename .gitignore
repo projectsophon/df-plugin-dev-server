@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# npm packages after install
+node_modules
+package-lock.json
