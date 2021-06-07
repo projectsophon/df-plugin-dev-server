@@ -7,7 +7,7 @@
  */
  console.log(df, ui);
 
- class Plugin {
+ class PluginTemplate {
    constructor() {}
  
    /**
@@ -24,4 +24,4 @@
  /**
   * And don't forget to export it!
   */
- export default Plugin;
+ export default PluginTemplate;
