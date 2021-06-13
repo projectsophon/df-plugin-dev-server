@@ -8,19 +8,40 @@ import { default as chalk } from "chalk";
 
 const { bold, underline } = chalk;
 
+async function getFiles(dir = "./", ext = [".js", ".ts"]) {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+
+    // Get files within the current directory and add a path key to the file objects
+    const files = entries
+        .filter(file => {
+          return !file.isDirectory()
+        })
+        .filter((filename) => {
+          return ext.includes(filename.name.slice(-3,));
+        })
+        .map(file => (
+          dir + file.name
+        ));
+
+    // Get folders within the current directory
+    const folders = entries.filter(folder => folder.isDirectory());
+
+    for (const folder of folders)
+        /*
+          Add the found files within the subdirectory to the files array by calling the
+          current function itself
+        */
+        files.push(...await getFiles(`${dir}/${folder.name}/`));
+
+    return files;
+}
+
+
 export async function start({ dir, ext }) {
   const proxyPort = await getPort({ port: 2222 });
   const esbuildPort = await getPort({ port: 2221 });
   const pluginDir = path.join(process.cwd(), dir);
-  const allFiles = await fs.readdir(pluginDir);
-  const entryPoints = allFiles
-    .filter((filename) => {
-      return ext.includes(path.extname(filename));
-    })
-    .map((filename) => {
-      return path.join(dir, filename);
-    });
-
+  const entryPoints = await getFiles(dir, ext);
   const esbuildServeConfig = {
     port: esbuildPort,
   };
@@ -93,7 +114,6 @@ class Plugin {
     this.plugin?.destroy?.();
   }
 }
-
 export default Plugin;
 `;
 }
