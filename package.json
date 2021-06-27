@@ -24,6 +24,7 @@
   "dependencies": {
     "chalk": "^4.1.1",
     "esbuild": "^0.12.1",
+    "fast-glob": "^3.2.6",
     "get-port": "^5.1.1",
     "yargs": "^17.0.1"
   },

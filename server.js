@@ -5,21 +5,34 @@ import * as fs from "fs/promises";
 import * as esbuild from "esbuild";
 import getPort from "get-port";
 import { default as chalk } from "chalk";
+import fastGlob from "fast-glob";
 
 const { bold, underline } = chalk;
 
-export async function start({ dir, ext }) {
+export async function start({ dir, ext, glob }) {
   const proxyPort = await getPort({ port: 2222 });
   const esbuildPort = await getPort({ port: 2221 });
-  const pluginDir = path.join(process.cwd(), dir);
-  const allFiles = await fs.readdir(pluginDir);
-  const entryPoints = allFiles
-    .filter((filename) => {
-      return ext.includes(path.extname(filename));
-    })
-    .map((filename) => {
-      return path.join(dir, filename);
-    });
+
+  let entryPoints;
+  let printLocation;
+  if (dir) {
+    // Deprecated options code path
+    ext = ext || [".js", ".ts"];
+    const pluginDir = path.join(process.cwd(), dir);
+
+    const allFiles = await fs.readdir(pluginDir);
+    entryPoints = allFiles
+      .filter((filename) => {
+        return ext.includes(path.extname(filename));
+      })
+      .map((filename) => {
+        return path.join(dir, filename);
+      });
+    printLocation = underline(pluginDir);
+  } else {
+    entryPoints = await fastGlob(glob);
+    printLocation = glob.map((g) => underline(path.join(process.cwd(), g))).join(", ");
+  }
 
   const esbuildServeConfig = {
     port: esbuildPort,
@@ -68,7 +81,7 @@ export async function start({ dir, ext }) {
   });
 
   proxyServer.listen(proxyPort, () => {
-    console.log(`ESBuild for ${underline(pluginDir)} on port ${underline(esbuildPort)}`);
+    console.log(`ESBuild for ${printLocation} on port ${underline(esbuildPort)}`);
     console.log(`Development server started on ${bold(`http://127.0.0.1:${proxyPort}/`)}`);
   });
 }
