@@ -28,8 +28,9 @@ Start a Dark Forest plugin development server.
 Options:
   --help     Show help                                                 [boolean]
   --version  Show version number                                       [boolean]
-  --dir      The directory where plugins exist     [string] [default: "plugins"]
-  --ext      Extensions to process              [array] [default: [".js",".ts"]]
+  --dir      The directory to load     [deprecated: use --glob instead] [string]
+  --ext      Extensions to process      [deprecated: use --glob instead] [array]
+  --glob     Glob for finding plugins   [array] [default: ["plugins/*.(js|ts)"]]
 ```
 
 And then run the server:
@@ -52,18 +53,14 @@ The easiest way to load plugins while developing would be to use something like 
 
 ```js
 // This maps to ./plugins/PluginTemplate.js or ./plugins/PluginTemplate.ts by default
-import Plugin from "http://127.0.0.1:2222/PluginTemplate.js"
-
-export default Plugin;
+export { default } from "http://127.0.0.1:2222/PluginTemplate.js";
 ```
 
 However, Dark Forest plugins are cached, so you'd need to do some sort of cache busting each time you make a change. Luckily, we've taken care of that for you! To get free cache busting, you can add `?dev` to the end of your plugin URL.
 
 ```js
 // Notice the ?dev
-import Plugin from "http://127.0.0.1:2222/PluginTemplate.js?dev"
-
-export default Plugin;
+export { default } from "http://127.0.0.1:2222/PluginTemplate.js?dev";
 ```
 
 Doing the above will proxy your plugin through a cache busting plugin!
@@ -101,7 +98,6 @@ docker stop plugin_server
 ### Security notes for docker containers
 
 Docker is working on another layer meaning your internet connection from docker containers is bridged through your network interface by default. Starting this container with default configuration using commands from above opens port to this docker container to any incoming IP subnet existing (bind 0.0.0.0). Default system firewall configuration will not prevent access from outside world if your router does not block ports by default. KEEP THIS IN MIND. Storing vulnerable data inside container is not recommended with this configuration. You should edit docker network of `plugin_server` to make it harden. The easiest way is to set flag `--internal` for specific docker network, to prevent access from other computers.
-
 
 ## License
 

@@ -12,14 +12,19 @@ const parser = yargs()
     (yargs) => {
       return yargs.options({
         dir: {
-          desc: "The directory where plugins exist",
+          desc: "The directory to load",
           type: "string",
-          default: "plugins",
+          deprecated: "use --glob instead",
         },
         ext: {
           desc: "Extensions to process",
           type: "array",
-          default: [".js", ".ts"],
+          deprecated: "use --glob instead",
+        },
+        glob: {
+          desc: "Glob for finding plugins",
+          type: "array",
+          default: ["plugins/*.(js|ts)"],
         },
       });
     },
