@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.1.0...v1.2.0) (2021-06-28)
+
+
+### Features
+
+* Add docker image and docker-compose setup ([#5](https://www.github.com/projectsophon/df-plugin-dev-server/issues/5)) ([b9fd252](https://www.github.com/projectsophon/df-plugin-dev-server/commit/b9fd2523c38ca5036bf03b05b8369291fe1129a1))
+* Support globbing for plugins ([#7](https://www.github.com/projectsophon/df-plugin-dev-server/issues/7)) ([9112c6f](https://www.github.com/projectsophon/df-plugin-dev-server/commit/9112c6f8aa30aa6ed9bf9b2ac6f853517e276e80))
+
 ## [1.1.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.0.2...v1.1.0) (2021-05-29)
 
 
