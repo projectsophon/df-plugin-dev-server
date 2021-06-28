@@ -1,6 +1,6 @@
 {
   "name": "@projectsophon/df-plugin-dev-server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "An ESBuild server for Dark Forest plugin development.",
   "author": "Blaine Bublitz <blaine.bublitz@gmail.com> (https://github.com/phated)",
   "repository": "projectsophon/df-plugin-dev-server",
