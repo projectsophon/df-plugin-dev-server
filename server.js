@@ -34,15 +34,31 @@ export async function start({ dir, ext, glob }) {
     printLocation = glob.map((g) => underline(path.join(process.cwd(), g))).join(", ");
   }
 
+  // Custom resolver that externalizes http:// and https:// imports
+  const httpExternalResolver = {
+    name: "http-external",
+    setup(build) {
+      // Mark all paths starting with "http://" or "https://" as external
+      build.onResolve({ filter: /^https?:\/\// }, (args) => {
+        return { path: args.path, external: true };
+      });
+    },
+  };
+
   const esbuildServeConfig = {
     port: esbuildPort,
   };
+
+  const jsxConfig = {};
+  const plugins = [httpExternalResolver];
 
   const esbuildConfig = {
     entryPoints: entryPoints,
     bundle: true,
     format: "esm",
     target: ["es2020"],
+    plugins,
+    ...jsxConfig,
   };
 
   const { host, port } = await esbuild.serve(esbuildServeConfig, esbuildConfig);
