@@ -26,6 +26,11 @@ const parser = yargs()
           type: "array",
           default: ["plugins/*.(js|jsx|ts|tsx)"],
         },
+        preact: {
+          desc: "Enabled custom preact support",
+          type: "boolean",
+          default: false,
+        },
       });
     },
     start
