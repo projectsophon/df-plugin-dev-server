@@ -24,7 +24,7 @@ const parser = yargs()
         glob: {
           desc: "Glob for finding plugins",
           type: "array",
-          default: ["plugins/*.(js|ts)"],
+          default: ["plugins/*.(js|jsx|ts|tsx)"],
         },
       });
     },
