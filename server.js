@@ -9,7 +9,7 @@ import fastGlob from "fast-glob";
 
 const { bold, underline } = chalk;
 
-export async function start({ dir, ext, glob }) {
+export async function start({ dir, ext, glob, preact }) {
   const proxyPort = await getPort({ port: 2222 });
   const esbuildPort = await getPort({ port: 2221 });
 
@@ -45,12 +45,37 @@ export async function start({ dir, ext, glob }) {
     },
   };
 
+  // Custom resolver that rewrites react->preact/compat
+  const preactResolver = {
+    name: "preact",
+    setup(build) {
+      build.onResolve({ filter: /^react-dom\/test-utils$/ }, (args) => {
+        return { path: path.join(args.resolveDir, "preact/test-utils") };
+      });
+
+      build.onResolve({ filter: /^react-dom$/ }, (args) => {
+        return { path: path.join(args.resolveDir, "preact/compat") };
+      });
+
+      build.onResolve({ filter: /^react$/ }, (args) => {
+        return { path: path.join(args.resolveDir, "preact/compat") };
+      });
+    },
+  };
+
   const esbuildServeConfig = {
     port: esbuildPort,
   };
 
   const jsxConfig = {};
   const plugins = [httpExternalResolver];
+  if (preact) {
+    plugins.push(preactResolver);
+    jsxConfig = {
+      jsxFactory: "h",
+      jsxFragment: "Fragment",
+    };
+  }
 
   const esbuildConfig = {
     entryPoints: entryPoints,
