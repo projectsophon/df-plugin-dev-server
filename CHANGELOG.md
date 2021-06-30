@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.2.0...v1.3.0) (2021-06-30)
+
+
+### Features
+
+* Accept `.jsx` and `.tsx` extensions ([976b72b](https://www.github.com/projectsophon/df-plugin-dev-server/commit/976b72b1e5c0aac3a9777b04601e1f31c6de1e5b))
+* Add custom Preact JSX support behind flag ([9797450](https://www.github.com/projectsophon/df-plugin-dev-server/commit/97974509bee29dc12dd23f04147e6b0c37eadac8))
+* Add support for http/https imports ([8bc5e04](https://www.github.com/projectsophon/df-plugin-dev-server/commit/8bc5e046b72f1e2d06cde59c309dc7ff029edc37))
+
 ## [1.2.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.1.0...v1.2.0) (2021-06-28)
 
 
