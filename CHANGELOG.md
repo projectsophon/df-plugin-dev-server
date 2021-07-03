@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.3.0...v1.3.1) (2021-07-03)
+
+
+### Bug Fixes
+
+* Correct typo `const` -> `let` ([#11](https://www.github.com/projectsophon/df-plugin-dev-server/issues/11)) ([75b541d](https://www.github.com/projectsophon/df-plugin-dev-server/commit/75b541d47c2c5a7c92406f0feadc3646d22dc4b8))
+
 ## [1.3.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.2.0...v1.3.0) (2021-06-30)
 
 
