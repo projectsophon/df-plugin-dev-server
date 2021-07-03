@@ -67,7 +67,7 @@ export async function start({ dir, ext, glob, preact }) {
     port: esbuildPort,
   };
 
-  const jsxConfig = {};
+  let jsxConfig = {};
   const plugins = [httpExternalResolver];
   if (preact) {
     plugins.push(preactResolver);
