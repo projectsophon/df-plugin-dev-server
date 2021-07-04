@@ -6,6 +6,9 @@ import * as esbuild from "esbuild";
 import getPort from "get-port";
 import { default as chalk } from "chalk";
 import fastGlob from "fast-glob";
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 const { bold, underline } = chalk;
 
@@ -50,15 +53,15 @@ export async function start({ dir, ext, glob, preact }) {
     name: "preact",
     setup(build) {
       build.onResolve({ filter: /^react-dom\/test-utils$/ }, (args) => {
-        return { path: path.join(args.resolveDir, "preact/test-utils") };
+        return { path: require.resolve("preact/test-utils") };
       });
 
       build.onResolve({ filter: /^react-dom$/ }, (args) => {
-        return { path: path.join(args.resolveDir, "preact/compat") };
+        return { path: require.resolve("preact/compat") };
       });
 
       build.onResolve({ filter: /^react$/ }, (args) => {
-        return { path: path.join(args.resolveDir, "preact/compat") };
+        return { path: require.resolve("preact/compat") };
       });
     },
   };
