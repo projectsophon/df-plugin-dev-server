@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.2](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.3.1...v1.3.2) (2021-07-04)
+
+
+### Bug Fixes
+
+* Use require.resolve to find preact modules ([#13](https://www.github.com/projectsophon/df-plugin-dev-server/issues/13)) ([7b9d670](https://www.github.com/projectsophon/df-plugin-dev-server/commit/7b9d670a81cb538bdfb5446d726032a782d4d71d))
+
 ### [1.3.1](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.3.0...v1.3.1) (2021-07-03)
 
 
