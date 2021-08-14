@@ -6,11 +6,83 @@ import * as esbuild from "esbuild";
 import getPort from "get-port";
 import { default as chalk } from "chalk";
 import fastGlob from "fast-glob";
-import { createRequire } from 'module';
+import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 
 const { bold, underline } = chalk;
+
+// Custom resolver that externalizes http:// and https:// imports
+const httpExternalResolver = {
+  name: "http-external",
+  setup(build) {
+    // Mark all paths starting with "http://" or "https://" as external
+    build.onResolve({ filter: /^https?:\/\// }, (args) => {
+      return { path: args.path, external: true };
+    });
+  },
+};
+
+// Custom resolver that rewrites react->preact/compat
+const preactResolver = {
+  name: "preact",
+  setup(build) {
+    build.onResolve({ filter: /^react-dom\/test-utils$/ }, (args) => {
+      return { path: require.resolve("preact/test-utils") };
+    });
+
+    build.onResolve({ filter: /^react-dom$/ }, (args) => {
+      return { path: require.resolve("preact/compat") };
+    });
+
+    build.onResolve({ filter: /^react$/ }, (args) => {
+      return { path: require.resolve("preact/compat") };
+    });
+  },
+};
+
+function getDefaultConfig() {
+  return {
+    bundle: true,
+    format: "esm",
+    target: ["es2020"],
+  };
+}
+
+function getExtraConfig(preact) {
+  let jsxConfig = {};
+  const plugins = [httpExternalResolver];
+  if (preact) {
+    plugins.push(preactResolver);
+    jsxConfig = {
+      jsxFactory: "h",
+      jsxFragment: "Fragment",
+    };
+  }
+
+  return {
+    plugins,
+    ...jsxConfig,
+  };
+}
+
+export async function bundle({ glob, preact, outdir }) {
+  const entryPoints = await fastGlob(glob);
+  const printLocation = glob.map((g) => underline(path.join(process.cwd(), g))).join(", ");
+
+  try {
+    console.log(`ESBuild bundling ${printLocation} into ${underline(outdir)} directory`);
+    await esbuild.build({
+      entryPoints: entryPoints,
+      outdir,
+      ...getDefaultConfig(),
+      ...getExtraConfig(preact),
+    });
+  } catch (err) {
+    console.error("Error occurred during bundling", err);
+    process.exit(1);
+  }
+}
 
 export async function start({ dir, ext, glob, preact }) {
   const proxyPort = await getPort({ port: 2222 });
@@ -37,56 +109,14 @@ export async function start({ dir, ext, glob, preact }) {
     printLocation = glob.map((g) => underline(path.join(process.cwd(), g))).join(", ");
   }
 
-  // Custom resolver that externalizes http:// and https:// imports
-  const httpExternalResolver = {
-    name: "http-external",
-    setup(build) {
-      // Mark all paths starting with "http://" or "https://" as external
-      build.onResolve({ filter: /^https?:\/\// }, (args) => {
-        return { path: args.path, external: true };
-      });
-    },
-  };
-
-  // Custom resolver that rewrites react->preact/compat
-  const preactResolver = {
-    name: "preact",
-    setup(build) {
-      build.onResolve({ filter: /^react-dom\/test-utils$/ }, (args) => {
-        return { path: require.resolve("preact/test-utils") };
-      });
-
-      build.onResolve({ filter: /^react-dom$/ }, (args) => {
-        return { path: require.resolve("preact/compat") };
-      });
-
-      build.onResolve({ filter: /^react$/ }, (args) => {
-        return { path: require.resolve("preact/compat") };
-      });
-    },
-  };
-
   const esbuildServeConfig = {
     port: esbuildPort,
   };
 
-  let jsxConfig = {};
-  const plugins = [httpExternalResolver];
-  if (preact) {
-    plugins.push(preactResolver);
-    jsxConfig = {
-      jsxFactory: "h",
-      jsxFragment: "Fragment",
-    };
-  }
-
   const esbuildConfig = {
     entryPoints: entryPoints,
-    bundle: true,
-    format: "esm",
-    target: ["es2020"],
-    plugins,
-    ...jsxConfig,
+    ...getDefaultConfig(),
+    ...getExtraConfig(preact),
   };
 
   const { host, port } = await esbuild.serve(esbuildServeConfig, esbuildConfig);
