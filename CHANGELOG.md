@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.3.2...v1.4.0) (2021-08-14)
+
+
+### Features
+
+* Implement bundle command ([#16](https://www.github.com/projectsophon/df-plugin-dev-server/issues/16)) ([4c83232](https://www.github.com/projectsophon/df-plugin-dev-server/commit/4c832324e988d424359423bc4d73ab2d09ac006f))
+
 ### [1.3.2](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.3.1...v1.3.2) (2021-07-04)
 
 
