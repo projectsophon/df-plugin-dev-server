@@ -1,19 +1,19 @@
-version: '3.9'
+version: "3.9"
 services:
-    plugin_server:
-        ports:
-            - ${WEB_LISTEN_PORT_BACKEND:-2222}:${WEB_OUTPUT_PORT_BACKEND:-2222}
-        container_name: plugin_server
-        build:
-            context: .
-            target: base
-            dockerfile: prod.Dockerfile
-        command: node cli.js
-        restart: unless-stopped
-        volumes:
-            - ./plugins:/app/plugins
-        networks:
-            - plugin_network
+  plugin_server:
+    ports:
+      - ${WEB_LISTEN_PORT_BACKEND:-2222}:${WEB_OUTPUT_PORT_BACKEND:-2222}
+    container_name: plugin_server
+    build:
+      context: .
+      target: base
+      dockerfile: prod.Dockerfile
+    command: node cli.js
+    restart: unless-stopped
+    volumes:
+      - ./plugins:/app/plugins
+    networks:
+      - plugin_network
 
 networks:
-    plugin_network:
+  plugin_network:

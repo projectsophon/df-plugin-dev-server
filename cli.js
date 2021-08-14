@@ -2,7 +2,7 @@
 
 import { default as yargs } from "yargs";
 
-import { start } from "./server.js";
+import { start, bundle } from "./server.js";
 
 const parser = yargs()
   .scriptName("df-plugin-dev-server")
@@ -34,6 +34,30 @@ const parser = yargs()
       });
     },
     start
+  )
+  .command(
+    "bundle",
+    "Produce bundles for Dark Forest plugins.",
+    (yargs) => {
+      return yargs.options({
+        glob: {
+          desc: "Glob for finding plugins",
+          type: "array",
+          default: ["plugins/*.(js|jsx|ts|tsx)"],
+        },
+        preact: {
+          desc: "Enabled custom preact support",
+          type: "boolean",
+          default: false,
+        },
+        outdir: {
+          desc: "The directory to output files",
+          type: "string",
+          required: true,
+        },
+      });
+    },
+    bundle
   );
 
 parser.parse(process.argv.slice(2));
