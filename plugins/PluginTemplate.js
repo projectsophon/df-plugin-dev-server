@@ -5,23 +5,23 @@
  *
  * Let's log these to the console when you run your plugin!
  */
- console.log(df, ui);
+console.log(df, ui);
 
- class PluginTemplate {
-   constructor() {}
- 
-   /**
-    * Called when plugin is launched with the "run" button.
-    */
-   async render(container) {}
- 
-   /**
-    * Called when plugin modal is closed.
-    */
-   destroy() {}
- }
- 
- /**
-  * And don't forget to export it!
-  */
- export default PluginTemplate;
+class PluginTemplate {
+  constructor() {}
+
+  /**
+   * Called when plugin is launched with the "run" button.
+   */
+  async render(container) {}
+
+  /**
+   * Called when plugin modal is closed.
+   */
+  destroy() {}
+}
+
+/**
+ * And don't forget to export it!
+ */
+export default PluginTemplate;
