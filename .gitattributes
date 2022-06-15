@@ -1,0 +1,5 @@
+# Autodetect text files
+* text=auto
+
+# Ensure cli.js always uses LF
+cli.js text eol=lf
