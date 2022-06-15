@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.4.0...v1.5.0) (2022-06-15)
+
+
+### Features
+
+* Update default glob so CLI also works in plugin repo ([#15](https://www.github.com/projectsophon/df-plugin-dev-server/issues/15)) ([fabc225](https://www.github.com/projectsophon/df-plugin-dev-server/commit/fabc225308c254d9ef19939a2953c36700a5d7a4))
+
 ## [1.4.0](https://www.github.com/projectsophon/df-plugin-dev-server/compare/v1.3.2...v1.4.0) (2021-08-14)
 
 
