@@ -24,7 +24,7 @@ const parser = yargs()
         glob: {
           desc: "Glob for finding plugins",
           type: "array",
-          default: ["**/*.(js|jsx|ts|tsx)"],
+          default: ["(plugins|content)/**/*.(js|jsx|ts|tsx)"],
         },
         preact: {
           desc: "Enabled custom preact support",
