@@ -27,15 +27,15 @@ const httpExternalResolver = {
 const preactResolver = {
   name: "preact",
   setup(build) {
-    build.onResolve({ filter: /^react-dom\/test-utils$/ }, (args) => {
+    build.onResolve({ filter: /^react-dom\/test-utils$/ }, (_args) => {
       return { path: require.resolve("preact/test-utils") };
     });
 
-    build.onResolve({ filter: /^react-dom$/ }, (args) => {
+    build.onResolve({ filter: /^react-dom$/ }, (_args) => {
       return { path: require.resolve("preact/compat") };
     });
 
-    build.onResolve({ filter: /^react$/ }, (args) => {
+    build.onResolve({ filter: /^react$/ }, (_args) => {
       return { path: require.resolve("preact/compat") };
     });
   },
@@ -80,6 +80,7 @@ export async function bundle({ glob, preact, outdir }) {
     });
   } catch (err) {
     console.error("Error occurred during bundling", err);
+    // eslint-disable-next-line no-process-exit
     process.exit(1);
   }
 }
